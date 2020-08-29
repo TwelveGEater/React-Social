@@ -1,0 +1,19 @@
+.header {
+    padding: 0px;
+    margin: 0px;
+    background-color: #333;
+    border-bottom: rgb(47, 51, 54) solid 1px;
+    /* border-left: solid rgb(47, 51, 54) 1px; */
+    border-right: solid rgb(47, 51, 54) 1px;
+    height: 3.5em;
+    position: fixed;
+    top: 0;
+    left: 25%;
+    width: 100%;
+    border-bottom: 1px solid black;
+    grid-area: header;
+}
+
+.header img {
+    width: 100px;
+}

@@ -1,0 +1,42 @@
+.profile {
+    border-left: solid rgb(47, 51, 54) 1px;
+    border-right: solid rgb(47, 51, 54) 1px;
+}
+
+.profile_background {
+    background-image: url('https://pbs.twimg.com/profile_banners/4463597177/1449960305/600x200');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.addPostContainer {
+    border-bottom: black 1px solid;
+}
+
+.addPost {
+    width: 95%;
+    margin: 0.5rem auto;
+}
+
+
+.addPost textarea {
+    border: none;
+    width: 90%;
+    margin: auto auto;
+    resize: none;
+}
+
+.addPost textarea:focus {
+    outline: none;
+}
+
+.profile {
+    grid-area: profile;
+}
+
+.posts {
+    padding: 10px 10px;
+}

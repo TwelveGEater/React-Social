@@ -1,0 +1,159 @@
+.dialog {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 5em;
+    padding: 1em 0px;
+    position: relative;
+}
+
+
+.user_photo img {
+    width: 5em;
+    height: 5em;
+    border-radius: 100%;
+    margin: 0 2em;
+}
+
+.dialog_data {
+    display: flex;
+    text-align: start;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10rem;
+}
+
+.username h3 {
+    margin: 0px 0px;
+    display: inline-block;
+}
+
+
+
+.newMessageField button {
+    margin: 0 2em;
+}
+
+/* .dialog {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 878px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        'dialog dialog'
+        'field field';
+} */
+
+.dialogField {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.userMessages {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.userMessages span {
+    background-color: cornsilk;
+    padding: 1.5em 2em;
+    border-radius: 10em;
+    border-bottom-left-radius: 0;
+    border: 1px solid black;
+}
+
+
+.myMessages {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row-reverse;
+    align-items: center;
+    align-self: flex-end;
+    margin: 1em;
+}
+
+
+
+.myMessages span {
+    background-color: cornsilk;
+    padding: 1.5em 2em;
+    border-radius: 10em;
+    border-bottom-right-radius: 0;
+    border: 1px solid black;
+    margin: 1em 1em;
+}
+
+.newMessageField {
+    position: fixed;
+    bottom: 0;
+    height: 5em;
+    padding: 1em 0;
+    background-color: rgb(47 51 54);
+}
+
+.newMessageField {
+    position: fixed;
+    background-color: #555;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newMessageContainer {
+    width: 100%;
+}
+
+.newMessage {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+
+.newMessage textarea {
+    margin-top: 1.5rem;
+    margin-left: 5rem;
+    width: 100%;
+    border: none;
+    resize: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+.newMessage textarea::placeholder {
+    color: rgba(255, 255, 255, 0.596);
+    ;
+}
+
+.newMessage textarea:focus {
+    outline: none;
+}
+
+.sendButton {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+
+}
+
+.sendButton:focus {
+    outline: none;
+}
+
+.sendArrow {
+    height: 100%;
+}
+
+.sendArrow:hover {
+    transition: color 0.5s ease;
+    height: 100%;
+    color: rgb(0, 255, 255);
+}
