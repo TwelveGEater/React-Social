@@ -1,9 +1,8 @@
 import { profileAPI } from './../DAL/api';
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
-const SET_USER_STATUS = 'SET-USER-STATUS';
+const ADD_POST = 'react-social/profile/ADD-POST';
+const SET_USER_PROFILE = 'react-social/profile/SET-USER-PROFILE';
+const SET_USER_STATUS = 'react-social/profile/SET-USER-STATUS';
 
 const initialState = {
 	posts: [
@@ -71,24 +70,21 @@ export const setUserStatus = (userStatus) => {
 	return { type: SET_USER_STATUS, userStatus };
 };
 
-export const getUserProfile = (userID) => (dispatch) => {
-	profileAPI.getProfile(userID).then((data) => {
-		dispatch(setUserProfile(data));
-	});
+export const getUserProfile = (userID) => async (dispatch) => {
+	const data = await profileAPI.getProfile(userID);
+	dispatch(setUserProfile(data));
 };
 
-export const getUserStatus = (userID) => (dispatch) => {
-	profileAPI.getUserStatus(userID).then((data) => {
-		dispatch(setUserStatus(data));
-	});
+export const getUserStatus = (userID) => async (dispatch) => {
+	const data = await profileAPI.getUserStatus(userID);
+	dispatch(setUserStatus(data));
 };
 
-export const setStatus = (status) => (dispatch) => {
-	profileAPI.setStatus(status).then((data) => {
-		if (data.resultCode === 0) {
-			dispatch(setUserStatus(status));
-		}
-	});
+export const setStatus = (status) => async (dispatch) => {
+	const data = await profileAPI.setStatus(status);
+	if (data.resultCode === 0) {
+		dispatch(setUserStatus(status));
+	}
 };
 
 export default profileReducer;

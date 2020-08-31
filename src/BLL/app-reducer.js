@@ -1,8 +1,6 @@
-import { authAPI } from '../DAL/api';
-import { getUserProfile } from './profile-reducer';
 import { getAuthorization } from './auth-reducer';
 
-const APP_INITIALIZATION = 'APP-INITIALIZATION';
+const APP_INITIALIZATION = `react-social/app/APP-INITIALIZATION`;
 
 const initialState = {
 	initializationSuccess: false

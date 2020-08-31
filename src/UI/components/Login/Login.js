@@ -1,74 +1,7 @@
 import React from 'react';
 import style from './Login.module.css';
-import { Form, Field } from 'react-final-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Redirect } from 'react-router-dom';
-
-const required = (value) => (value ? undefined : <span className={style.errorMessage}>{'Required'}</span>);
-
-const LoginForm = (props) => {
-	return (
-		<Form
-			initialValues={{
-				email: 'test@mail.com',
-				password: 'test'
-			}}
-			onSubmit={(values) => {
-				if (values.email && values.password) {
-					props.getLogin(values.email, values.password, values.rememberMe || false);
-				}
-			}}
-			render={({ handleSubmit, submitting }) => (
-				<form onSubmit={handleSubmit}>
-					<div className="input-group form-group">
-						<div className={style.inputGroupPrepend}>
-							<span className="input-group-text">
-								<FontAwesomeIcon className="fas fa-user" icon={faUser} />
-							</span>
-						</div>
-						<Field name="email" validate={required} component="input">
-							{({ input, meta }) => (
-								<div className={style.formBlock}>
-									<input {...input} type="text" placeholder="Email" className="form-control" />
-									{meta.error && meta.touched && meta.error}
-								</div>
-							)}
-						</Field>
-					</div>
-					<div className="input-group form-group">
-						<div className={style.inputGroupPrepend}>
-							<span className="input-group-text">
-								<FontAwesomeIcon className="fas fa-key" icon={faKey} />
-							</span>
-						</div>
-						<Field name="password" validate={required} component="input">
-							{({ input, meta }) => (
-								<div className={style.formBlock}>
-									<input {...input} type="password" placeholder="Password" className="form-control" />
-									{meta.error && meta.touched && <span>{meta.error}</span>}
-								</div>
-							)}
-						</Field>
-					</div>
-					<div className={'row align-items-center ' + style.remember}>
-						<Field name="rememberMe" type="checkbox">
-							{({ input }) => <input {...input} type="checkbox" name="test" />}
-						</Field>Remember me
-					</div>
-					<div className="form-group">
-						<input
-							type="submit"
-							disabled={submitting}
-							value="Login"
-							className={'btn float-right ' + style.login_btn}
-						/>
-					</div>
-				</form>
-			)}
-		/>
-	);
-};
+import LoginForm from './LoginForm/LoginForm';
 
 const Login = (props) => {
 	if (props.isAuth) return <Redirect to="/profile" />;

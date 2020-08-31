@@ -1,5 +1,5 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'react-social/dialog/SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'react-social/dialog/UPDATE-NEW-MESSAGE-TEXT';
 
 const initialState = {
 	dialogData: [
@@ -15,19 +15,20 @@ const initialState = {
 	}
 };
 
+const newMessageData = (newMessage) => {
+	return {
+		id: 5,
+		message: newMessage,
+		time: '12:55'
+	};
+};
+
 const dialogReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SEND_MESSAGE:
 			return {
 				...state,
-				dialogData: [
-					...state.dialogData,
-					{
-						id: 5,
-						message: action.newMessage,
-						time: '12:55'
-					}
-				]
+				dialogData: [ ...state.dialogData, newMessageData(action.newMessage) ]
 			};
 
 		case UPDATE_NEW_MESSAGE_TEXT:
