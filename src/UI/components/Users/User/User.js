@@ -3,12 +3,12 @@ import style from './User.module.css';
 import userPhoto from '../../../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
 
-const User = ({ user, inProgress, unfollow, follow }) => {
+const User = ({ user, inProgress, unfollow, follow, addVisitedUser }) => {
 	return (
 		<div key={user.id} className={style.user}>
 			<span>
 				<div>
-					<NavLink to={'/profile/' + user.id}>
+					<NavLink to={'/profile/' + user.id} onClick={() => addVisitedUser(user)}>
 						<img
 							src={user.photos.small == null ? userPhoto : user.photos.small}
 							className={style.userPhoto}

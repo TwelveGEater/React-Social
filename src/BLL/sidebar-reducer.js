@@ -1,25 +1,28 @@
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
+const ADD_VISITED_USER = 'react-social/sidebar/ADD-POST';
+
 const initialState = {
-	friendList: [
-		{
-			id: '1',
-			username: 'Pasha @PashaBest',
-			userPhoto: 'https://pbs.twimg.com/profile_images/1231048883683418114/QJ580r2t_400x400.jpg'
-		},
-		{
-			id: '2',
-			username: 'Cloud9 @Cloud9',
-			userPhoto: 'https://pbs.twimg.com/profile_images/1231048883683418114/QJ580r2t_400x400.jpg'
-		},
-		{
-			id: '3',
-			username: 'Cr1t- @Cr1tdota',
-			userPhoto: 'https://pbs.twimg.com/profile_images/1231048883683418114/QJ580r2t_400x400.jpg'
-		}
-	]
+	friendList: []
 };
 
 const sidebarReducer = (state = initialState, action) => {
-	return state;
+	switch (action.type) {
+		case ADD_VISITED_USER:
+			return {
+				...state,
+				friendList:
+					[ ...state.friendList, action.userProfile ].length > 3
+						? [ ...state.friendList, action.userProfile ].splice(1)
+						: [ ...state.friendList, action.userProfile ]
+			};
+		default:
+			return state;
+	}
+};
+
+export const addVisitedUser = (userProfile) => {
+	return { type: ADD_VISITED_USER, userProfile };
 };
 
 export default sidebarReducer;

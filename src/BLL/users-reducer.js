@@ -5,6 +5,7 @@ const FOLLOW = 'react-social/user/FOLLOW';
 const UNFOLLOW = 'react-social/user/UNFOLLOW';
 const SET_USERS = 'react-social/user/SET-USERS';
 const SET_CURRENT_PAGE = 'react-social/user/SET-CURRENT-PAGE';
+const SET_PORTION_NUMBER = 'react-social/user/SET-PORTION-NUMBER';
 const SET_TOTAL_USERS_COUNT = 'react-social/user/SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'react-social/user/TOGGLE-IS-FETCHING';
 const IN_PROGRESS = 'react-social/user/IN_PROGRESS';
@@ -14,6 +15,7 @@ const initialState = {
 	pageSize: 6,
 	totalUsersCount: 12,
 	currentPage: 1,
+	portionNumber: 1,
 	isFetching: false,
 	inProgress: []
 };
@@ -45,6 +47,11 @@ const usersReducer = (state = initialState, action) => {
 				...state,
 				totalUsersCount: action.totalCount
 			};
+		case SET_PORTION_NUMBER:
+			return {
+				...state,
+				portionNumber: action.portionNumber
+			};
 		case TOGGLE_IS_FETCHING:
 			return {
 				...state,
@@ -75,6 +82,11 @@ export const setUsers = (users) => {
 export const setCurrentPage = (currentPage) => {
 	return { type: SET_CURRENT_PAGE, currentPage };
 };
+
+export const setPortionNumber = (portionNumber) => {
+	return { type: SET_PORTION_NUMBER, portionNumber };
+};
+
 export const setTotalUsersCount = (totalCount) => {
 	return { type: SET_TOTAL_USERS_COUNT, totalCount };
 };

@@ -22,10 +22,14 @@ export const userAPI = {
 
 export const authAPI = {
 	me() {
-		return replicaAxios.get(`auth/me`).then((response) => response.data);
+		return replicaAxios.get(`auth/me`).then((response) => {
+			return response.data;
+		});
 	},
 	login(email, password, rememberMe) {
-		return replicaAxios.post(`auth/login`, { email, password, rememberMe });
+		return replicaAxios.post(`auth/login`, { email, password, rememberMe }).then((response) => {
+			return response;
+		});
 	},
 	logout() {
 		return replicaAxios.delete(`auth/login`);
@@ -44,9 +48,25 @@ export const profileAPI = {
 		});
 	},
 	setStatus(status) {
-		debugger;
 		return replicaAxios.put(`/profile/status`, { status }).then((response) => {
-			debugger;
+			return response.data;
+		});
+	},
+	setPhoto(img) {
+		const formData = new FormData();
+		formData.append('image', img);
+		return replicaAxios
+			.put(`/profile/photo`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			})
+			.then((response) => {
+				return response.data;
+			});
+	},
+	setProfileData(data) {
+		return replicaAxios.put(`/profile`, data).then((response) => {
 			return response.data;
 		});
 	}

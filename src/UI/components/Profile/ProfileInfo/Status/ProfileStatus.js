@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isPageOwner } from './../../../samples/isPageOwner/isPageOwner';
 
 const ProfileStatus = (props) => {
 	const [ editMode, setEditMode ] = useState(false);
@@ -20,7 +21,7 @@ const ProfileStatus = (props) => {
 
 	return (
 		<div className="input-group input-group-sm mb-3">
-			{editMode ? (
+			{editMode && isPageOwner.check() ? (
 				<div className="input-group-prepend">
 					<input
 						onChange={statusOnChange}
@@ -35,9 +36,9 @@ const ProfileStatus = (props) => {
 				<div
 					className="input-group-prepend"
 					onDoubleClick={enterEditMode}
-					title="Profile status. Double click to edit!"
+					title={'Profile status.' + (isPageOwner.check() ? ' Double click to edit!' : '')}
 				>
-					<p className="card-text">{status || '*****'}</p>
+					<p className="card-text">{status || String.fromCodePoint(0x1f44b)}</p>
 				</div>
 			)}
 		</div>

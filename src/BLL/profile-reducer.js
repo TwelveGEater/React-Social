@@ -1,8 +1,11 @@
+import { FORM_ERROR } from 'final-form';
 import { profileAPI } from './../DAL/api';
 
 const ADD_POST = 'react-social/profile/ADD-POST';
 const SET_USER_PROFILE = 'react-social/profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'react-social/profile/SET-USER-STATUS';
+const SET_USER_PHOTO = 'react-social/profile/SET-USER-PHOTO';
+const IS_EDIT_MODE = 'react-social/profile/IS-EDIT-MODE';
 
 const initialState = {
 	posts: [
@@ -32,7 +35,8 @@ const initialState = {
 		}
 	],
 	profile: null,
-	userStatus: ''
+	userStatus: '',
+	editModeProfile: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -53,6 +57,10 @@ const profileReducer = (state = initialState, action) => {
 			return { ...state, profile: action.profile };
 		case SET_USER_STATUS:
 			return { ...state, userStatus: action.userStatus };
+		case SET_USER_PHOTO:
+			return { ...state, profile: { ...state.profile, photos: action.userPhotos } };
+		case IS_EDIT_MODE:
+			return { ...state, editModeProfile: action.value };
 		default:
 			return state;
 	}
@@ -70,9 +78,18 @@ export const setUserStatus = (userStatus) => {
 	return { type: SET_USER_STATUS, userStatus };
 };
 
+export const setUserPhoto = (userPhotos) => {
+	return { type: SET_USER_PHOTO, userPhotos };
+};
+
+export const isEditMode = (value) => {
+	return { type: IS_EDIT_MODE, value };
+};
+
 export const getUserProfile = (userID) => async (dispatch) => {
 	const data = await profileAPI.getProfile(userID);
 	dispatch(setUserProfile(data));
+	return data;
 };
 
 export const getUserStatus = (userID) => async (dispatch) => {
@@ -84,6 +101,23 @@ export const setStatus = (status) => async (dispatch) => {
 	const data = await profileAPI.setStatus(status);
 	if (data.resultCode === 0) {
 		dispatch(setUserStatus(status));
+	}
+};
+
+export const setPhoto = (img) => async (dispatch) => {
+	const data = await profileAPI.setPhoto(img);
+	if (data.resultCode === 0) {
+		dispatch(setUserPhoto(data.data.photos));
+	}
+};
+
+export const setProfileData = (data) => async (dispatch) => {
+	const response = await profileAPI.setProfileData(data);
+	if (response.resultCode === 0) {
+		const userProfile = await dispatch(getUserProfile(data.userId));
+		dispatch(isEditMode(false));
+	} else {
+		return { [FORM_ERROR]: 'Login Failed' };
 	}
 };
 

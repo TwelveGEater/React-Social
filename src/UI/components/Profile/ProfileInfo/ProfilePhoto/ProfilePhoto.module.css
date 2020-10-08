@@ -1,3 +1,9 @@
+.profile_info {
+    /* border-left: solid rgb(47, 51, 54) 1px;
+    border-right: solid rgb(47, 51, 54) 1px; */
+}
+
+
 .mainPhoto {
     position: relative;
     height: 200px;
@@ -45,4 +51,11 @@
     top: 43%;
     right: 46%;
     transform: scale(3);
+}
+
+
+.profile_about {
+    border-bottom: solid 1px black;
+    height: 120px;
+    padding: 5px 5px;
 }

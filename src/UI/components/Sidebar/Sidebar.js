@@ -3,7 +3,8 @@ import style from './Sidebar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Authorization from '../samples/Authorization/Authorization';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import userPhoto from './../../../assets/images/user.png';
 
 const Sidebar = (props) => {
 	if (!props.isAuth) return <Authorization />;
@@ -30,19 +31,27 @@ const Sidebar = (props) => {
 			</div>
 
 			<button onClick={goToLoginPage}>exit</button>
-			<div className={style.topFriends}>
-				<h2>Friends</h2>
-				<div className={style.friendList}>
-					{props.sidebarData.friendList.map((friend) => {
-						return (
-							<div className={style.friendItem} key={friend.id}>
-								<img src={friend.userPhoto} className={style.friendPhoto} alt="" />
-								<span>{friend.username}</span>
-							</div>
-						);
-					})}
+			{props.visitedUsers.length > 0 && (
+				<div className={style.topFriends}>
+					<h2>Last Visited</h2>
+					<div className={style.friendList}>
+						{props.visitedUsers.map((friend) => {
+							return (
+								<NavLink to={`/profile/${friend.id}`}>
+									<div className={style.friendItem} key={friend.id}>
+										<img
+											src={friend.photos.small || userPhoto}
+											className={style.friendPhoto}
+											alt="user photo"
+										/>
+										<span>{friend.name}</span>
+									</div>
+								</NavLink>
+							);
+						})}
+					</div>
 				</div>
-			</div>
+			)}
 			<a href="#" target="_blank" className="tw-interactive tw-link">
 				<img
 					src="https://panels-images.twitch.tv/panel-30814134-image-79bc862e-042a-4581-871d-f94d09617a69"

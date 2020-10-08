@@ -14,7 +14,8 @@ class SidebarContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
 	isAuth: state.auth.isAuth,
-	login: state.auth.login
+	login: state.auth.login,
+	visitedUsers: state.sidebarPage.friendList
 });
 
 export default connect(mapStateToProps, { setAuthorizationData, getAuthorization, getLogout })(SidebarContainer);

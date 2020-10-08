@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Pagination.module.css';
 
-const Pagination = ({ totalItemsCount, pageSize, currentPage, changePage, portionSize = 10 }) => {
+const Pagination = ({
+	totalItemsCount,
+	pageSize,
+	currentPage,
+	changePage,
+	portionSize = 10,
+	setPortionNumber,
+	portionNumber
+}) => {
 	const pageCount = Math.ceil(totalItemsCount / pageSize);
 	const pageArray = [];
 
@@ -9,7 +17,6 @@ const Pagination = ({ totalItemsCount, pageSize, currentPage, changePage, portio
 		pageArray.push(i);
 	}
 	const portionCount = Math.ceil(pageCount / portionSize);
-	const [ portionNumber, setPortionNumber ] = useState(1);
 	const leftPortionLimit = (portionNumber - 1) * portionSize + 1;
 	const rightPortionLimit = portionNumber * portionSize;
 

@@ -26,7 +26,7 @@ export const setAuthorizationData = (id, email, login, isAuth) => {
 	return { type: SET_AUTH_DATA, data: { id, email, login, isAuth } };
 };
 
-export const getAuthorization = () => async (dispatch) => {
+export const getAuthorization = (data) => async (dispatch) => {
 	const data = await authAPI.me();
 	if (data.resultCode === 0) {
 		let { id, email, login } = data.data;
@@ -38,7 +38,9 @@ export const getAuthorization = () => async (dispatch) => {
 export const getLogin = (login, password, rememberMe) => async (dispatch) => {
 	const data = await authAPI.login(login, password, rememberMe);
 	if (data.data.resultCode === 0) {
-		dispatch(getAuthorization());
+		dispatch(getAuthorization(data));
+	} else {
+		throw new Error(data.data.messages[0]);
 	}
 };
 

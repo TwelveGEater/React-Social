@@ -8,10 +8,12 @@ import {
 	setTotalUsersCount,
 	toggleIsFetching,
 	toggleInProgress,
-	getUsers
+	getUsers,
+	setPortionNumber
 } from './../../../BLL/users-reducer';
 import Users from './Users';
 import Preloader from '../samples/Preloader/Preloader';
+import { addVisitedUser } from './../../../BLL/sidebar-reducer';
 
 class UsersAPIComponent extends React.Component {
 	componentDidMount() {
@@ -39,6 +41,9 @@ class UsersAPIComponent extends React.Component {
 						currentPage={this.props.currentPage}
 						inProgress={this.props.inProgress}
 						toggleInProgress={this.props.toggleInProgress}
+						addVisitedUser={this.props.addVisitedUser}
+						setPortionNumber={this.props.setPortionNumber}
+						portionNumber={this.props.portionNumber}
 					/>
 				)}
 			</div>
@@ -50,6 +55,7 @@ const mapStateToProps = (state) => {
 	return {
 		users: state.usersPage.usersData,
 		pageSize: state.usersPage.pageSize,
+		portionNumber: state.usersPage.portionNumber,
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
 		isFetching: state.usersPage.isFetching,
@@ -65,7 +71,9 @@ const UsersContainer = connect(mapStateToProps, {
 	setTotalUsersCount,
 	toggleIsFetching,
 	toggleInProgress,
-	getUsers
+	getUsers,
+	addVisitedUser,
+	setPortionNumber
 })(UsersAPIComponent);
 
 export default UsersContainer;

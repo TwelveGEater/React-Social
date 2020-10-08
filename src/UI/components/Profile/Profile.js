@@ -10,7 +10,17 @@ const Profile = (props) => {
 	}
 	return (
 		<main className={style.profile}>
-			<ProfileInfo profile={props.profile} userStatus={props.userStatus} setStatus={props.setStatus} />
+			<ProfileInfo
+				userID={props.userID}
+				loggedUserID={props.loggedUserID}
+				profile={props.profile}
+				userStatus={props.userStatus}
+				setStatus={props.setStatus}
+				setPhoto={props.setPhoto}
+				editModeProfile={props.editModeProfile}
+				setProfileData={props.setProfileData}
+				isEditMode={props.isEditMode}
+			/>
 			<PostsContainer />
 		</main>
 	);

@@ -13,6 +13,8 @@ class Users extends React.Component {
 					currentPage={this.props.currentPage}
 					changePage={this.props.changePage}
 					portionSize="6"
+					setPortionNumber={this.props.setPortionNumber}
+					portionNumber={this.props.portionNumber}
 				/>
 				<div className={style.users}>
 					{this.props.users.map((user) => {
@@ -22,6 +24,8 @@ class Users extends React.Component {
 								inProgress={this.props.inProgress}
 								unfollow={this.props.unfollow}
 								follow={this.props.follow}
+								addVisitedUser={this.props.addVisitedUser}
+								key={user.id}
 							/>
 						);
 					})}
