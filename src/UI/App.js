@@ -22,6 +22,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import yellow from '@material-ui/core/colors/yellow';
 import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
 import AppWrapper from './AppWraper';
 
 const theme = createMuiTheme({
@@ -29,19 +30,19 @@ const theme = createMuiTheme({
 		type: 'dark',
 		primary: {
 			light: '#757ce8',
-			main: '#3f50b5',
-			dark: '#002884',
-			contrastText: '#fff'
+			main: purple[500],
+			dark: '#030303',
+			contrastText: '#d7dadc'
 		},
 		secondary: {
 			light: '#ff7961',
-			main: '#f44336',
-			dark: '#ba000d',
-			contrastText: '#000'
+			main: purple[500],
+			dark: '#1a1a1b',
+			contrastText: '#d7dadc'
 		},
 		background: {
-			paper: '#000',
-			default: '#000'
+			paper: `#1a1a1b`,
+			default: '#030303'
 		}
 	}
 });

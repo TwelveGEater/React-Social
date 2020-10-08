@@ -8,6 +8,7 @@ const Profile = (props) => {
 	if (!props.profile) {
 		return <Preloader />;
 	}
+
 	return (
 		<main className={style.profile}>
 			<ProfileInfo

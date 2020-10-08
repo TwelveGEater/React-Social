@@ -18,7 +18,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import logo from '../assets/images/logo.png';
 import appBar from '../assets/images/code.png';
-
+import appBar2 from '../assets/images/header-bg.jpg';
+import appBar3 from '../assets/images/bg-header.jpg';
+import neon from '../assets/images/neon.jpg';
 const drawerWidth = 240;
 
 const iconsNavBar = [ <AccountBox />, <MailIcon />, <PeopleAltIcon />, <SettingsIcon /> ];
@@ -29,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	appBar: {
 		width: `calc(100% - ${drawerWidth}px)`,
-		marginRight: drawerWidth
+		marginRight: drawerWidth,
+		background: `url(${neon}) no-repeat top right`
 	},
 	drawer: {
 		width: drawerWidth,
@@ -45,13 +48,16 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(3)
 	},
 	listItem: {
-		backgroundColor: theme.palette.background.default
+		backgroundColor: theme.palette.background.paper
 	},
 	logo: {
 		maxWidth: 160
 	},
 	link: {
 		color: 'white'
+	},
+	icons: {
+		color: theme.palette.primary.main
 	}
 }));
 
@@ -89,7 +95,7 @@ const AppWrapper = (props) => {
 					{[ 'profile', 'dialogs', 'users', 'settings' ].map((text, index) => (
 						<NavLink to={`/${text}`} activeClassName="selected" style={{ textDecoration: 'none' }}>
 							<ListItem button key={text} className={classes.listItem}>
-								<ListItemIcon>{iconsNavBar[index]}</ListItemIcon>
+								<ListItemIcon className={classes.icons}>{iconsNavBar[index]}</ListItemIcon>
 								<ListItemText
 									primary={
 										<Typography type="body2" className={classes.link}>
