@@ -1,48 +1,52 @@
+.profile_info {
+  margin-top: 100px;
+}
+
 .mainPhoto {
-    position: relative;
-    height: 200px;
-    width: 10%;
+  position: relative;
+  height: 200px;
+  width: 10%;
 }
 
 .profile_photo {
-    width: 10em;
-    height: 10em;
-    border-radius: 100%;
-    border: solid 1px white;
-    position: absolute;
-    top: 10%;
-    left: 30%;
+  width: 10em;
+  height: 10em;
+  border-radius: 100%;
+  border: solid 1px white;
+  position: absolute;
+  top: 10%;
+  left: 30%;
 
 }
 
 
 .uploadPhoto {
-    position: absolute;
-    width: 10em;
-    height: 10em;
-    border-radius: 100%;
-    top: 10%;
-    left: 30%;
-    z-index: 99;
-    opacity: 0;
-    cursor: pointer;
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  border-radius: 100%;
+  top: 10%;
+  left: 30%;
+  z-index: 99;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .uploadPhotoIcon {
-    position: absolute;
-    width: 10em;
-    height: 10em;
-    border-radius: 100%;
-    top: 10%;
-    left: 30%;
-    background-color: rgba(0, 0, 0, 0.438);
-    z-index: 98;
+  position: absolute;
+  width: 10em;
+  height: 10em;
+  border-radius: 100%;
+  top: 10%;
+  left: 30%;
+  background-color: rgba(0, 0, 0, 0.438);
+  z-index: 98;
 }
 
 .uploadPhotoIcon>:first-child {
-    color: rgb(109, 109, 109);
-    position: absolute;
-    top: 43%;
-    right: 46%;
-    transform: scale(3);
+  color: rgb(109, 109, 109);
+  position: absolute;
+  top: 43%;
+  right: 46%;
+  transform: scale(3);
 }

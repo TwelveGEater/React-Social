@@ -17,9 +17,6 @@ import AccountBox from '@material-ui/icons/AccountBox';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 import logo from '../assets/images/logo.png';
-import appBar from '../assets/images/code.png';
-import appBar2 from '../assets/images/header-bg.jpg';
-import appBar3 from '../assets/images/bg-header.jpg';
 import neon from '../assets/images/neon.jpg';
 const drawerWidth = 240;
 
@@ -33,6 +30,17 @@ const useStyles = makeStyles((theme) => ({
 		width: `calc(100% - ${drawerWidth}px)`,
 		marginRight: drawerWidth,
 		background: `url(${neon}) no-repeat top right`
+	},
+	'appBar::after': {
+		content: '',
+		display: 'block',
+		borderBottom: `2px solid`,
+		borderBottomColor: `
+    linear-gradient(
+      to right, 
+      purple, 
+      rgba(0, 0, 0, 0)
+    )`
 	},
 	drawer: {
 		width: drawerWidth,

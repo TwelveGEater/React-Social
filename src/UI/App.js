@@ -5,14 +5,10 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { getLogout } from '../BLL/auth-reducer';
 import './App.css';
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/Dialogs/Dialogs';
 import Settings from './components/Settings/Settings';
-import Footer from './components/Footer/Footer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import SidebarContainer from './components/Sidebar/SidebarContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,10 +16,8 @@ import { appInitialization } from '../BLL/app-reducer';
 import Preloader from './components/samples/Preloader/Preloader';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
-import yellow from '@material-ui/core/colors/yellow';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
 import AppWrapper from './AppWraper';
+import { Box } from '@material-ui/core';
 
 const theme = createMuiTheme({
 	palette: {
@@ -62,36 +56,52 @@ class App extends React.Component {
 				<Suspense fallback={<Preloader />}>
 					{/* <Header /> */}
 					{/* <Navbar isAuth={this.props.isAuth} /> */}
-					<Switch>
-						<Route path="/login" render={() => <LoginContainer />} />
-						<Route
-							path="/"
-							render={() => (
-								<AppWrapper
-									getLogout={this.props.getLogout}
-									currentContent={() => {
-										return (
-											<div className="app-wrapper">
-												<Route path="/profile/:userID?" render={() => <ProfileContainer />} />
+					<Box
+						style={{
+							borderWidth: '2px',
+							borderStyle: 'solid',
+							borderImage: ` 
+                linear-gradient(
+                  to bottom, 
+                  purple, 
+                  rgba(0, 0, 0, 0)
+                ) 1 100%`
+						}}
+					>
+						<Switch>
+							<Route path="/login" render={() => <LoginContainer />} />
+							<Route
+								path="/"
+								render={() => (
+									<AppWrapper
+										getLogout={this.props.getLogout}
+										currentContent={() => {
+											return (
+												<div className="app-wrapper">
+													<Route
+														path="/profile/:userID?"
+														render={() => <ProfileContainer />}
+													/>
 
-												<Route
-													path="/dialogs"
-													render={() => <Dialogs dialogsData={this.props.dialogsPage} />}
-													exact
-												/>
+													<Route
+														path="/dialogs"
+														render={() => <Dialogs dialogsData={this.props.dialogsPage} />}
+														exact
+													/>
 
-												<Route path="/users" render={() => <UsersContainer />} />
+													<Route path="/users" render={() => <UsersContainer />} />
 
-												<Route path="/settings" render={() => <Settings />} />
+													<Route path="/settings" render={() => <Settings />} />
 
-												<Route path="/dialogs/1" render={() => <DialogContainer />} />
-											</div>
-										);
-									}}
-								/>
-							)}
-						/>
-					</Switch>
+													<Route path="/dialogs/1" render={() => <DialogContainer />} />
+												</div>
+											);
+										}}
+									/>
+								)}
+							/>
+						</Switch>
+					</Box>
 					{/* <SidebarContainer sidebarData={this.props.sidebarPage} /> */}
 					{/* <Footer /> */}
 				</Suspense>
