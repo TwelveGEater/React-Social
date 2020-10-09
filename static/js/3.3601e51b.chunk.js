@@ -1,2 +1,0 @@
-(this["webpackJsonpreact-social"]=this["webpackJsonpreact-social"]||[]).push([[3],{103:function(e,a,o){"use strict";o.r(a);o(0);var t=o(59),i=o(60),s=o(8),n=Object(s.b)((function(e){return{dialogData:e.dialogPage.dialogData,newMessageBody:e.dialogPage.newMessageText,profilePhoto:e.profilePage.profile?e.profilePage.profile.photos.large:null}}),(function(e){return{sendMessage:function(a){e(Object(t.b)(a))}}}))(i.a);a.default=n}}]);
-//# sourceMappingURL=3.3601e51b.chunk.js.map
