@@ -1,74 +1,156 @@
-import React from 'react';
-import { Field, Form, useField } from 'react-final-form';
-import { FORM_ERROR } from 'final-form';
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import { Container, Checkbox, InputLabel } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 
-const Error = ({ name }) => {
-	const { meta: { touched, error } } = useField(name, { subscription: { touched: true, error: true } });
-	return touched && error ? <span>{error}</span> : null;
-};
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		'& > *': {
+			margin: theme.spacing(3)
+		}
+	},
+	checkedBox: {
+		marginTop: '30px'
+	},
+	button: {
+		margin: theme.spacing(1)
+	}
+}));
 
 const ProfileForm = (props) => {
-	return (
-		<Form
-			initialValues={props.profile}
-			onSubmit={async (values) => props.setProfileData(values).then((error) => console.log(error))}
-			validate={(values) => {
-				const errors = {};
-				return errors;
-			}}
-			// validate={console.log()}
-			render={({ handleSubmit, form, pristine, submitting, values, submitError }) => {
-				return (
-					<form onSubmit={handleSubmit}>
-						{submitError && <div className="error">{submitError}</div>}
-						<div>
-							<label>Full name:</label>
-							<Field name="fullName" component="input" type="text" />
-							{/* <Error name="firstName" /> */}
-						</div>
-						<div>
-							<label>About me:</label>
-							<Field name="aboutMe" component="input" type="text" />
-							{/* <Error name="firstName" /> */}
-						</div>
-						<div>
-							<label>Looking for a job:</label>
-							<Field name="lookingForAJob" component="input" type="checkbox" />
-							{/* <Error name="firstName" /> */}
-						</div>
-						{values.lookingForAJob && (
-							<div>
-								<label>Looking for a job description:</label>
-								<Field
-									name="lookingForAJobDescription"
-									component="input"
-									placeholder="lookingForAJobDescription"
-								/>
-							</div>
-						)}
+	const classes = useStyles();
 
-						<div>
-							<label>Сontacts:</label>
-							{Object.keys(values.contacts).map((key) => (
-								<div key={key}>
-									<label>{key}</label>
-									<Field name={`contacts[${key}]`} component="input" type="text" />
-									{/* <Error name="firstName" /> */}
-								</div>
-							))}
-						</div>
-						<div className="buttons">
-							<button type="submit" disabled={submitting}>
-								Submit
-							</button>
-							<button type="button" onClick={form.reset} disabled={submitting || pristine}>
-								Reset
-							</button>
-						</div>
-					</form>
-				);
-			}}
-		/>
+	const [ fieldQualifier, changeFieldQualifier ] = useState(' ');
+	const [ messageError, changeMessageError ] = useState(' ');
+
+	const formik = useFormik({
+		initialValues: props.profile,
+		onSubmit: async (values, formik) => {
+			props.setProfileData(values).catch((error) => {
+				let [ errorText, fieldError ] = error.message.split(/\(\s*/);
+
+				let fieldSelector = fieldError.split(/->\s*/).map((e) => {
+					let str = e.match(/\w/gi).join('');
+					return str.charAt(0).toLowerCase() + str.slice(1);
+				});
+				changeFieldQualifier(fieldSelector[1]);
+				changeMessageError(errorText);
+			});
+		}
+	});
+
+	return (
+		<Container fixed className={classes.root}>
+			<Grid container justify="center" md={5}>
+				<form onSubmit={formik.handleSubmit}>
+					<TextField
+						variant="standard"
+						margin="normal"
+						id="fullName"
+						label="Full Name"
+						name="fullName"
+						autoComplete="fullName"
+						autoFocus
+						onChange={formik.handleChange}
+						value={formik.values.fullName}
+						required
+						fullWidth
+					/>
+					<TextField
+						variant="standard"
+						margin="normal"
+						id="aboutMe"
+						label="About me"
+						name="aboutMe"
+						autoComplete="aboutMe"
+						autoFocus
+						onChange={formik.handleChange}
+						value={formik.values.aboutMe}
+						required
+						fullWidth
+					/>
+					<Grid item className={classes.checkedBox}>
+						<InputLabel htmlFor="lookingForAJob" style={{ display: 'inline', marginRight: '10px' }}>
+							Looking for a job:
+						</InputLabel>
+						<Checkbox
+							checked={formik.values.lookingForAJob}
+							id="lookingForAJob"
+							name="lookingForAJob"
+							autoComplete="lookingForAJob"
+							onChange={formik.handleChange}
+							value={formik.values.lookingForAJob}
+						/>
+					</Grid>
+					{formik.values.lookingForAJob && (
+						<TextField
+							variant="standard"
+							margin="normal"
+							fullWidth
+							id="lookingForAJobDescription"
+							label="Looking for a job description"
+							name="lookingForAJobDescription"
+							autoComplete="lookingForAJobDescription"
+							autoFocus
+							onChange={formik.handleChange}
+							value={formik.values.lookingForAJobDescription}
+							required
+						/>
+					)}
+					<Grid item className={classes.checkedBox}>
+						<InputLabel htmlFor="lookingForAJob">Сontacts:</InputLabel>
+						{Object.keys(formik.values.contacts).map((key) => (
+							<TextField
+								key={key}
+								margin="normal"
+								fullWidth
+								id={key}
+								label={key}
+								name={`contacts[${key}]`}
+								autoFocus
+								onChange={formik.handleChange}
+								value={formik.values.contacts[key]}
+								size="small"
+								inputProps={{ 'aria-label': 'description' }}
+								error={fieldQualifier === key ? true : false}
+								helperText={fieldQualifier === key ? messageError : ''}
+							/>
+						))}
+					</Grid>
+
+					<Grid item className="buttons">
+						<Button
+							type="submit"
+							variant="contained"
+							color="primary"
+							size="small"
+							className={classes.button}
+							onClick={formik.onSubmit}
+							startIcon={<SaveIcon />}
+						>
+							Save
+						</Button>
+						<Button
+							type="submit"
+							variant="contained"
+							color="primary"
+							size="small"
+							className={classes.button}
+							onClick={formik.onSubmit}
+							startIcon={<RotateLeftIcon />}
+						>
+							Reset
+						</Button>
+					</Grid>
+				</form>
+			</Grid>
+		</Container>
 	);
 };
 

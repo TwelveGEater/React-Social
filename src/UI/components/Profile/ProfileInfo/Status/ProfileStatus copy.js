@@ -45,7 +45,11 @@ class ProfileStatus extends React.Component {
 						/>
 					</div>
 				) : (
-					<div className="input-group-prepend" onDoubleClick={this.enterEditMode}>
+					<div
+						className="input-group-prepend"
+						onDoubleClick={this.enterEditMode}
+						style={{ cursor: 'pointer' }}
+					>
 						<p className="card-text">{this.props.userStatus || '*****'}</p>
 					</div>
 				)}

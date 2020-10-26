@@ -117,7 +117,7 @@ export const setProfileData = (data) => async (dispatch) => {
 		const userProfile = await dispatch(getUserProfile(data.userId));
 		dispatch(isEditMode(false));
 	} else {
-		return { [FORM_ERROR]: 'Login Failed' };
+		throw new Error(response.messages[0]);
 	}
 };
 

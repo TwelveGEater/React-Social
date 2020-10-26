@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './Pagination.module.css';
+import Pagination from '@material-ui/lab/Pagination';
 
-const Pagination = ({
+const PaginationList = ({
 	totalItemsCount,
 	pageSize,
 	currentPage,
@@ -23,8 +24,19 @@ const Pagination = ({
 	return (
 		<div>
 			<div className={style.center}>
-				<div className={style.pagination}>
-					<span
+				<Pagination
+					count={totalItemsCount}
+					showFirstButton
+					showLastButton
+					page={currentPage}
+					onChange={(event, page) => {
+						changePage(page);
+					}}
+					size="large"
+					variant="outlined"
+					color="secondary"
+				/>
+				{/* <span
 						onClick={() => {
 							return portionNumber > 1 && setPortionNumber(portionNumber - 1);
 						}}
@@ -55,11 +67,10 @@ const Pagination = ({
 						}}
 					>
 						&raquo;
-					</span>
-				</div>
+					</span> */}
 			</div>
 		</div>
 	);
 };
 
-export default Pagination;
+export default PaginationList;

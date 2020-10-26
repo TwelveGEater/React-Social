@@ -2,6 +2,7 @@ import React from 'react';
 import style from './User.module.css';
 import userPhoto from '../../../../assets/images/user.png';
 import { NavLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 const User = ({ user, inProgress, unfollow, follow, addVisitedUser }) => {
 	return (
@@ -18,23 +19,27 @@ const User = ({ user, inProgress, unfollow, follow, addVisitedUser }) => {
 				</div>
 				<div>
 					{user.followed ? (
-						<button
+						<Button
+							variant="contained"
+							color="secondary"
 							disabled={inProgress.some((id) => id === user.id)}
 							onClick={() => {
 								unfollow(user.id);
 							}}
 						>
 							Unfollow
-						</button>
+						</Button>
 					) : (
-						<button
+						<Button
+							variant="contained"
+							color="secondary"
 							disabled={inProgress.some((id) => id === user.id)}
 							onClick={() => {
 								follow(user.id);
 							}}
 						>
 							Follow
-						</button>
+						</Button>
 					)}
 				</div>
 			</span>
